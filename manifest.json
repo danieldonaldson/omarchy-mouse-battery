@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.danieldonaldson.mouse-battery",
+  "name": "Mouse Battery",
+  "version": "1.0.0",
+  "author": "Daniel Donaldson",
+  "description": "Battery level of connected wireless mice, read live from UPower. Hidden when no mouse is connected.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Mouse Battery",
+    "description": "Battery percentage of connected wireless mice",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "lowThreshold": 20,
+      "showPercentage": true
+    },
+    "schema": [
+      {
+        "key": "showPercentage",
+        "type": "boolean",
+        "label": "Show percentage",
+        "defaultValue": true,
+        "description": "Off shows just the icon; the level stays in the tooltip."
+      },
+      {
+        "key": "lowThreshold",
+        "type": "integer",
+        "label": "Low battery threshold (%)",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "defaultValue": 20,
+        "description": "At or below this the widget turns the urgent colour."
+      }
+    ]
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/danieldonaldson/omarchy-mouse-battery",
+  "repository": "https://github.com/danieldonaldson/omarchy-mouse-battery",
+  "keywords": [
+    "mouse",
+    "battery",
+    "bluetooth",
+    "upower"
+  ]
+}
