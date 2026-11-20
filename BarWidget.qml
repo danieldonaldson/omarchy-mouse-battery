@@ -33,6 +33,16 @@ BarWidget {
   }
   readonly property bool low: present && level <= lowThreshold
 
+  // The model name comes from the device; keep a misbehaving one from
+  // stretching the tooltip.
+  function deviceName(d) {
+    var name = String(d.model || "").trim()
+    if (name === "") return strings.t("mouse.unnamed")
+    return name.length > 48 ? name.slice(0, 47) + "…" : name
+  }
+
+  Translations { id: strings; directory: Qt.resolvedUrl("i18n") }
+
   visible: present
   implicitWidth: present ? button.implicitWidth : 0
   implicitHeight: button.implicitHeight
@@ -49,7 +59,9 @@ BarWidget {
     tooltipText: {
       var lines = []
       for (var i = 0; i < root.mice.length; i++)
-        lines.push((root.mice[i].model || "Mouse") + ": " + Math.round(root.mice[i].percentage * 100) + "%")
+        lines.push(strings.t("mouse.level")
+          .arg(root.deviceName(root.mice[i]))
+          .arg(I18n.formatNumber(Math.round(root.mice[i].percentage * 100))))
       return lines.join("\n")
     }
   }
